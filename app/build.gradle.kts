@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -26,6 +27,9 @@ android {
             )
         }
     }
+    buildFeatures{
+        viewBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,6 +47,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.github.yuriy-budiyev:code-scanner:2.3.2")
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.android.volley:volley-cronet:1.2.1")
+    implementation(platform("com.google.firebase:firebase-bom:32.4.1"))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
