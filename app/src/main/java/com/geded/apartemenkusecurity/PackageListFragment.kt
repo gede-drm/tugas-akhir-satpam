@@ -1,5 +1,6 @@
 package com.geded.apartemenkusecurity
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -65,7 +66,17 @@ class PackageListFragment : Fragment() {
                     binding.recViewPackageList.visibility = View.INVISIBLE
                 }
             },
-        Response.ErrorListener {  }){
+        Response.ErrorListener {
+            val builder = AlertDialog.Builder(activity)
+            builder.setCancelable(false)
+            builder.setTitle("Terjadi Masalah")
+            builder.setMessage("Terdapat Masalah Jaringan\nSilakan Coba Lagi Nanti.")
+            builder.setPositiveButton("OK"){dialog, which->
+                activity?.finish()
+                System.exit(0)
+            }
+            builder.create().show()
+        }){
             override fun getParams(): MutableMap<String, String> {
                 val params = HashMap<String, String>()
                 params["tower"] = tower_id.toString()

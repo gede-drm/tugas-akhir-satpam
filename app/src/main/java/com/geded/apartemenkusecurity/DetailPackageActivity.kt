@@ -2,9 +2,11 @@ package com.geded.apartemenkusecurity
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -27,6 +29,14 @@ class DetailPackageActivity : AppCompatActivity() {
         var shared: SharedPreferences = getSharedPreferences(Global.sharedFile, Context.MODE_PRIVATE)
         val token = shared.getString(LoginActivity.TOKEN, "").toString()
 
+        binding.imgDetailPackage.isVisible = false
+        binding.lblUnitDP.isVisible = false
+        binding.txtUnitDP.isVisible = false
+        binding.lblDateDP.isVisible = false
+        binding.txtReceiveDateDP.isVisible = false
+        binding.lblDateDP.isVisible = false
+        binding.txtDescriptionDP.isVisible = false
+
         var q = Volley.newRequestQueue(this)
         val url = Global.urlWS + "package/detail"
 
@@ -36,6 +46,14 @@ class DetailPackageActivity : AppCompatActivity() {
                 val obj = JSONObject(it)
                 if(obj.getString("status")=="success") {
                     val unitObj = obj.getJSONObject("data")
+                    binding.imgDetailPackage.isVisible = true
+                    binding.lblUnitDP.isVisible = true
+                    binding.txtUnitDP.isVisible = true
+                    binding.lblDateDP.isVisible = true
+                    binding.txtReceiveDateDP.isVisible = true
+                    binding.lblDateDP.isVisible = true
+                    binding.txtDescriptionDP.isVisible = true
+                    binding.progressBarDP.isVisible = false
                     binding.txtUnitDP.setText(unitObj.getString("unit_no"))
                     binding.txtReceiveDateDP.setText(unitObj.getString("receive_date"))
                     binding.txtDescriptionDP.setText(unitObj.getString("description"))

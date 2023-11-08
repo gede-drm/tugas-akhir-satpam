@@ -6,8 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".DetailPackageActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBarDP"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblDetailDP" />
+
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/lblDetailDP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -28,11 +38,11 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/lblDetailDP"
         app:srcCompat="@drawable/baseline_image_24_grey" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/lblUnitDP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -52,10 +62,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/lblUnitDP" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/lblDateDP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -75,10 +85,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/lblDateDP" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/lblDescDP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -98,5 +108,5 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/lblDescDP" />
 </androidx.constraintlayout.widget.ConstraintLayout>
