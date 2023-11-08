@@ -23,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
         val SECURITY_ID = "SECURITY_ID"
         val TOWER = "TOWER"
         val TOWER_ID = "TOWER_ID"
+        val TOKEN = "TOKEN"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +31,7 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        var sharedFile = "com.geded.apartemenkusecurity"
-        var shared: SharedPreferences = getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
+        var shared: SharedPreferences = getSharedPreferences(Global.sharedFile, Context.MODE_PRIVATE)
 
         var usernameSP = shared.getString(LoginActivity.USERNAME, "")
         var security_idSP = shared.getInt(LoginActivity.SECURITY_ID, 0)
@@ -61,13 +61,15 @@ class LoginActivity : AppCompatActivity() {
                             var security_id = array["security_id"]
                             var tower = array["tower_name"]
                             var tower_id = array["tower_id"]
+                            var token = array["token"]
 
                             var editor: SharedPreferences.Editor = shared.edit()
-                            editor.putString(LoginActivity.USERNAME, username.toString())
-                            editor.putString(LoginActivity.NAME, name.toString())
-                            editor.putInt(LoginActivity.SECURITY_ID, security_id.toString().toInt())
-                            editor.putString(LoginActivity.TOWER, tower.toString())
-                            editor.putInt(LoginActivity.TOWER_ID, tower_id.toString().toInt())
+                            editor.putString(USERNAME, username.toString())
+                            editor.putString(NAME, name.toString())
+                            editor.putInt(SECURITY_ID, security_id.toString().toInt())
+                            editor.putString(TOWER, tower.toString())
+                            editor.putInt(TOWER_ID, tower_id.toString().toInt())
+                            editor.putString(TOKEN, token.toString())
                             editor.apply()
 
                             val intent = Intent(this, MainActivity::class.java)
@@ -98,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
                         return params
                     }
                 }
+                stringRequest.setShouldCache(false)
                 q.add(stringRequest)
             }
             else{

@@ -18,7 +18,7 @@
             android:layout_marginBottom="32dp"
             android:clickable="true"
             android:contentDescription="Scan Permission"
-            android:src="@drawable/ic_code_scanner_auto_focus_off"
+            android:src="@drawable/baseline_qr_code_scanner_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

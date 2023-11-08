@@ -1,6 +1,7 @@
 package com.geded.apartemenkusecurity
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,13 +23,14 @@ class PackageListFragment : Fragment() {
     var packages:ArrayList<PendingPackage> = ArrayList()
     var tower_name = ""
     var tower_id = 0
+    var token = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var sharedFile = "com.geded.apartemenkusecurity"
-        var shared: SharedPreferences = requireActivity().getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
+        var shared: SharedPreferences = requireActivity().getSharedPreferences(Global.sharedFile, Context.MODE_PRIVATE)
         tower_name = shared.getString(LoginActivity.TOWER.toString(),"").toString()
         tower_id = shared.getInt(LoginActivity.TOWER_ID,0)
+        token = shared.getString(LoginActivity.TOKEN, "").toString()
     }
 
     override fun onCreateView(
@@ -67,9 +69,11 @@ class PackageListFragment : Fragment() {
             override fun getParams(): MutableMap<String, String> {
                 val params = HashMap<String, String>()
                 params["tower"] = tower_id.toString()
+                params["token"] = token.toString()
                 return params
             }
         }
+        stringRequest.setShouldCache(false)
         q.add(stringRequest)
     }
 
@@ -77,7 +81,17 @@ class PackageListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.txtTowerName.text = "Tower $tower_name"
         binding.fabAddPackage.setOnClickListener {
-            Toast.makeText(activity,"Helo!", Toast.LENGTH_SHORT).show()
+            activity?.let {
+                val intent = Intent(it, AddPackageActivity::class.java)
+                it.startActivity(intent)
+            }
+        }
+        binding.fabScanPackage.setOnClickListener {
+            activity?.let {
+                val intent = Intent(it, ScannerActivity::class.java)
+                intent.putExtra(ScannerActivity.TYPE, "package")
+                it.startActivity(intent)
+            }
         }
     }
 

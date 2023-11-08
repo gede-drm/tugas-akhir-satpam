@@ -26,6 +26,9 @@ class PendingPackageViewHolder(val binding:LayoutPendingPackageListBinding): Rec
             Picasso.get().load(url).into(imgPackage)
             txtReceiveDate.text = pendingPackages[position].receive_date
             txtUnitNo.text = pendingPackages[position].unit_no
+            btnDetail.setOnClickListener {
+
+            }
         }
     }
 }

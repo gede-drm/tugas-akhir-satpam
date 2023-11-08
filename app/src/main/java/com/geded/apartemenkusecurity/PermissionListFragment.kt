@@ -1,5 +1,6 @@
 package com.geded.apartemenkusecurity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,7 +40,11 @@ class PermissionListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.fabScanPermission.setOnClickListener {
-            Toast.makeText(activity,"Helo!", Toast.LENGTH_SHORT).show()
+            activity?.let {
+                val intent = Intent(it, ScannerActivity::class.java)
+                intent.putExtra(ScannerActivity.TYPE, "permission")
+                it.startActivity(intent)
+            }
         }
     }
 
