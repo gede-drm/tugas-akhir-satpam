@@ -14,8 +14,11 @@ import com.geded.apartemenkusecurity.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+    var security_name = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var shared: SharedPreferences = requireActivity().getSharedPreferences(Global.sharedFile, Context.MODE_PRIVATE)
+        security_name = shared.getString(LoginActivity.NAME.toString(),"").toString()
     }
 
     override fun onCreateView(
@@ -30,6 +33,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.txtSecurityName.setText(security_name)
         binding.btnLogout.setOnClickListener {
             var shared: SharedPreferences = requireActivity().getSharedPreferences(Global.sharedFile, Context.MODE_PRIVATE)
             var editor: SharedPreferences.Editor = shared.edit()

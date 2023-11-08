@@ -1,5 +1,6 @@
 package com.geded.apartemenkusecurity
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +27,13 @@ class PendingPackageViewHolder(val binding:LayoutPendingPackageListBinding): Rec
             Picasso.get().load(url).into(imgPackage)
             txtReceiveDate.text = pendingPackages[position].receive_date
             txtUnitNo.text = pendingPackages[position].unit_no
-            btnDetail.setOnClickListener {
-
-            }
+        }
+        holder.binding.btnDetail.setOnClickListener {
+            val intent = Intent(this.context, DetailPackageActivity::class.java)
+            intent.putExtra(
+                DetailPackageActivity.PACKAGE_ID, pendingPackages[position].id.toString()
+            )
+            context?.startActivity(intent)
         }
     }
 }
