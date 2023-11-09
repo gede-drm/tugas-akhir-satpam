@@ -10,6 +10,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/txtEmptyPL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/public_sans_semibold"
+            android:text="Tidak Tercatat Adanya Perizinan yang Berjalan Hari Ini di Tower Ini"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recViewPermission" />
+
+        <TextView
+            android:id="@+id/txtTitlePL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/public_sans_semibold"
+            android:text="Perizinan Berlangsung Hari Ini"
+            android:textColor="@color/blue_700"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTowerNamePL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/public_sans_semibold"
+            android:text="Tower Oxford"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitlePL" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabScanPermission"
             android:layout_width="wrap_content"
@@ -21,5 +61,16 @@
             android:src="@drawable/baseline_qr_code_scanner_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recViewPermission"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTowerNamePL"
+            tools:listitem="@layout/layout_permission_list" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

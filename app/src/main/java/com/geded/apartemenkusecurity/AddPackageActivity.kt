@@ -278,7 +278,7 @@ class AddPackageActivity : AppCompatActivity() {
 
     fun getImageUriFromBitmap(bitmap: Bitmap): String{
         val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, bytes)
 
         val byteImagePhoto = bytes.toByteArray()
         val encodedImage = "data:image/jpeg;base64," + Base64.encodeToString(byteImagePhoto, Base64.DEFAULT)

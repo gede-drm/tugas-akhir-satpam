@@ -108,10 +108,10 @@ class PackageListFragment : Fragment() {
 
     fun updateList() {
         val lm: LinearLayoutManager = LinearLayoutManager(activity)
-        var recyclerView = view?.findViewById<RecyclerView>(R.id.recViewPackageList)
-        recyclerView?.layoutManager = lm
-        recyclerView?.setHasFixedSize(true)
-        recyclerView?.adapter = PendingPackageAdapter(packages, this.activity)
+        var recyclerView = binding.recViewPackageList
+        recyclerView.layoutManager = lm
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = PendingPackageAdapter(packages, this.activity)
     }
 
     companion object {

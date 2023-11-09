@@ -24,7 +24,7 @@ class PendingPackageViewHolder(val binding:LayoutPendingPackageListBinding): Rec
     override fun onBindViewHolder(holder: PendingPackageViewHolder, position: Int) {
         val url =pendingPackages[position].photo_url
         with(holder.binding){
-            Picasso.get().load(url).into(imgPackage)
+            Picasso.get().load(url).resize(200, 134).into(imgPackage)
             txtReceiveDate.text = pendingPackages[position].receive_date
             txtUnitNo.text = pendingPackages[position].unit_no
         }

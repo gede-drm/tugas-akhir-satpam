@@ -24,53 +24,54 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txtReceiveDate"
+                android:id="@+id/txtWorkerNumPL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/public_sans"
-                android:text="Receive Date"
+                android:text="Jumlah Pekerja Masuk: 5"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/imgPackage"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtUnitNoPL" />
 
             <TextView
-                android:id="@+id/txtUnitNo"
+                android:id="@+id/txtTenantPL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/public_sans"
+                android:text="Tenant: PT Home Service Indonesia"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtWorkerNumPL" />
+
+            <TextView
+                android:id="@+id/txtUnitNoPL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/public_sans_semibold"
                 android:text="O01-03"
                 android:textColor="@color/blue_700"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/imgPackage"
-                app:layout_constraintTop_toBottomOf="@+id/txtReceiveDate" />
-
-            <ImageView
-                android:id="@+id/imgPackage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btnDetail"
+                android:id="@+id/btnDetailPermission"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="Detail"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imgPackage" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTenantPL" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
