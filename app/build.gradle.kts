@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.geded.apartemenkusecurity"
-        minSdk = 24
+        minSdk = 23
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"

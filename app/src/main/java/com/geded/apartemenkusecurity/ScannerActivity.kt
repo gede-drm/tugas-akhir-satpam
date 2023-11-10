@@ -2,6 +2,7 @@ package com.geded.apartemenkusecurity
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -145,7 +146,102 @@ class ScannerActivity : AppCompatActivity() {
                     q.add(stringRequest)
                 }
                 else if(scanType == "permission"){
-                    Toast.makeText(this, "Scan Permission", Toast.LENGTH_SHORT).show()
+                    var q = Volley.newRequestQueue(this)
+                    val url = Global.urlWS + "permission/scan"
+
+                    val stringRequest = object : StringRequest(
+                        Method.POST, url,
+                        Response.Listener {
+                            val obj = JSONObject(it)
+                            if(obj.getString("status")=="success") {
+                                val permission_id = obj.getString("id")
+                                val builder = AlertDialog.Builder(this)
+                                builder.setCancelable(false)
+                                builder.setTitle("Perizinan ditemukan")
+                                builder.setMessage("Silakan Memasukkan Data Pekerja yang Masuk")
+                                builder.setPositiveButton("OK"){dialog, which->
+                                    val intent = Intent(this, WorkerPermitsActivity::class.java)
+                                    intent.putExtra(WorkerPermitsActivity.PERMISSION_PERMIT_ID, permission_id)
+                                    startActivity(intent)
+                                    this.finish()
+                                }
+                                builder.create().show()
+                            }
+                            else if(obj.getString("status") == "permitted"){
+                                val builder = AlertDialog.Builder(this)
+                                builder.setCancelable(false)
+                                builder.setTitle("Terjadi Kesalahan")
+                                builder.setMessage("Perizinan ini Sedang Berlangsung dan Telah diperbolehkan untuk Masuk.")
+                                builder.setPositiveButton("OK"){dialog, which->
+                                    this.finish()
+                                }
+                                builder.create().show()
+                            }
+                            else if(obj.getString("status") == "othertower"){
+                                val builder = AlertDialog.Builder(this)
+                                builder.setCancelable(false)
+                                builder.setTitle("Terjadi Kesalahan")
+                                builder.setMessage("Perizinan ini Milik Unit yang Berada di Tower Tempat Anda Sedang Tidak Bertugas.")
+                                builder.setPositiveButton("OK"){dialog, which->
+                                    this.finish()
+                                }
+                                builder.create().show()
+                            }
+                            else if(obj.getString("status") == "notfound"){
+                                val builder = AlertDialog.Builder(this)
+                                builder.setCancelable(false)
+                                builder.setTitle("Terjadi Kesalahan")
+                                builder.setMessage("Perizinan Tidak Terdaftar!\nPastikan Kode QR yang discan benar.")
+                                builder.setPositiveButton("OK"){dialog, which->
+                                    this.finish()
+                                }
+                                builder.create().show()
+                            }
+                            else if(obj.getString("status") == "securityprob" || obj.getString("status") == "notauthenticated") {
+                                var securityStatus = ""
+                                if(obj.getString("status") == "notauthenticated"){
+                                    securityStatus = "noshift"
+                                }
+                                else {
+                                    securityStatus = obj.getString("securitystatus")
+                                }
+                                Helper.logoutSystem(this, securityStatus)
+                            }
+                            else{
+                                val builder = AlertDialog.Builder(this)
+                                builder.setCancelable(false)
+                                builder.setTitle("Terjadi Masalah")
+                                builder.setMessage("Terdapat Masalah Jaringan\nSilakan Coba Lagi Nanti.")
+                                builder.setPositiveButton("OK"){dialog, which->
+                                    this.finish()
+                                }
+                                builder.create().show()
+                            }
+                        },
+                        Response.ErrorListener {
+                            val builder = AlertDialog.Builder(this)
+                            builder.setCancelable(false)
+                            builder.setTitle("Terjadi Masalah")
+                            builder.setMessage("Terdapat Masalah Jaringan\nSilakan Coba Lagi Nanti.")
+                            builder.setPositiveButton("OK"){dialog, which->
+                                this.finish()
+                            }
+                            builder.create().show()
+                        }
+                    )
+                    {
+                        override fun getParams(): MutableMap<String, String> {
+                            val params = HashMap<String, String>()
+                            params["code"] = code.text
+                            params["tower"] = tower_id.toString()
+                            params["officer"] = satpam_id.toString()
+                            params["token"] = token.toString()
+                            return params
+                        }
+                    }
+                    val retryPolicy = DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                    stringRequest.setRetryPolicy(retryPolicy);
+                    q.add(stringRequest)
                 }
             }
         }

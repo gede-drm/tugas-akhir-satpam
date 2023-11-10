@@ -2,10 +2,12 @@ package com.geded.apartemenkusecurity
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -27,6 +29,15 @@ class DetailPermissionActivity : AppCompatActivity() {
         var shared: SharedPreferences = getSharedPreferences(Global.sharedFile, Context.MODE_PRIVATE)
         val token = shared.getString(LoginActivity.TOKEN, "").toString()
 
+        binding.progressBarDPerm.isVisible = true
+        binding.txtUnitDPerm.isVisible = false
+        binding.txtTenantDPerm.isVisible = false
+        binding.txtDescriptionDPerm.isVisible = false
+        binding.txtDurationDPerm.isVisible = false
+        binding.txtWorkerNumDPerm.isVisible = false
+        binding.txtWorkerPermitDPerm.isVisible = false
+        binding.txtSecOfficerDPerm.isVisible = false
+
         var q = Volley.newRequestQueue(this)
         val url = Global.urlWS + "permission/detail"
 
@@ -36,6 +47,15 @@ class DetailPermissionActivity : AppCompatActivity() {
                 val obj = JSONObject(it)
                 if(obj.getString("status")=="success") {
                     val permObj = obj.getJSONObject("data")
+                    binding.progressBarDPerm.isVisible = false
+                    binding.txtUnitDPerm.isVisible = true
+                    binding.txtTenantDPerm.isVisible = true
+                    binding.txtDescriptionDPerm.isVisible = true
+                    binding.txtDurationDPerm.isVisible = true
+                    binding.txtWorkerNumDPerm.isVisible = true
+                    binding.txtWorkerPermitDPerm.isVisible = true
+                    binding.txtSecOfficerDPerm.isVisible = true
+
                     binding.txtUnitDPerm.text = permObj.getString("unit_no")
                     binding.txtTenantDPerm.text = permObj.getString("tenant")
                     binding.txtDescriptionDPerm.text = permObj.getString("description")

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailPermissionActivity">
+    tools:context=".WorkerPermitsActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -19,18 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ProgressBar
-                android:id="@+id/progressBarDPerm"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
-                android:id="@+id/txtUnitDPerm"
+                android:id="@+id/txtUnitWP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -38,10 +28,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblUnitDP2" />
+                app:layout_constraintTop_toBottomOf="@+id/lblUnitWP2" />
 
             <TextView
-                android:id="@+id/txtTenantDPerm"
+                android:id="@+id/txtTenantWP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -49,10 +39,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblUnitDP3" />
+                app:layout_constraintTop_toBottomOf="@+id/lblWP2" />
 
             <TextView
-                android:id="@+id/txtDurationDPerm"
+                android:id="@+id/txtDurationWP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -60,10 +50,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblUnitDP4" />
+                app:layout_constraintTop_toBottomOf="@+id/lblWP3" />
 
             <TextView
-                android:id="@+id/txtWorkerPermitDPerm"
+                android:id="@+id/txtWorkerNumWP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -71,10 +61,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblUnitDP6" />
+                app:layout_constraintTop_toBottomOf="@+id/lblWP5" />
 
             <TextView
-                android:id="@+id/txtWorkerNumDPerm"
+                android:id="@+id/txtDescriptionWP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -82,115 +72,102 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblUnitDP8" />
+                app:layout_constraintTop_toBottomOf="@+id/lblWP4" />
 
             <TextView
-                android:id="@+id/txtDescriptionDPerm"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="TextView"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblUnitDP5" />
-
-            <TextView
-                android:id="@+id/txtSecOfficerDPerm"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="24dp"
-                android:text="TextView"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblUnitDP7" />
-
-            <TextView
-                android:id="@+id/lblDetailDP2"
+                android:id="@+id/lblPermitCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/public_sans_semibold"
-                android:text="Detail Perizinan"
+                android:text="Tambah Izin Masuk"
                 android:textColor="@color/blue_700"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/lblUnitDP2"
+                android:id="@+id/lblUnitWP2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:text="Unit"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblDetailDP2" />
+                app:layout_constraintTop_toBottomOf="@+id/lblPermitCheck" />
 
             <TextView
-                android:id="@+id/lblUnitDP3"
+                android:id="@+id/lblWP2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:text="Tenant"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtUnitDPerm" />
+                app:layout_constraintTop_toBottomOf="@+id/txtUnitWP" />
 
             <TextView
-                android:id="@+id/lblUnitDP4"
+                android:id="@+id/lblWP3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:text="Durasi Pengerjaan"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtTenantDPerm" />
+                app:layout_constraintTop_toBottomOf="@+id/txtTenantWP" />
 
             <TextView
-                android:id="@+id/lblUnitDP5"
+                android:id="@+id/lblWP4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:text="Deskripsi"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtDurationDPerm" />
+                app:layout_constraintTop_toBottomOf="@+id/txtDurationWP" />
 
             <TextView
-                android:id="@+id/lblUnitDP8"
+                android:id="@+id/lblWP5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:text="Jumlah Pekerja Sesuai Perizinan"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtDescriptionDPerm" />
+                app:layout_constraintTop_toBottomOf="@+id/txtDescriptionWP" />
 
             <TextView
-                android:id="@+id/lblUnitDP6"
+                android:id="@+id/lblWP6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:text="Daftar Pekerja Masuk"
+                android:text="Daftar Pekerja (Centang Pekerja yang Hadir)"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtWorkerNumDPerm" />
+                app:layout_constraintTop_toBottomOf="@+id/txtWorkerNumWP" />
 
-            <TextView
-                android:id="@+id/lblUnitDP7"
+            <Button
+                android:id="@+id/btnSaveWP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:text="Petugas Masuk"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="Simpan"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recViewWorkerWP" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recViewWorkerWP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtWorkerPermitDPerm" />
+                app:layout_constraintTop_toBottomOf="@+id/lblWP6"
+                tools:listitem="@layout/layout_worker_wp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
