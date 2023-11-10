@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Response
@@ -54,31 +55,40 @@ class PermissionListFragment : Fragment() {
                 it.startActivity(intent)
             }
         }
+        binding.refreshLayoutPermission.setOnRefreshListener {
+            binding.recViewPermission.isVisible = false
+            updateAPI()
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        updateAPI()
+    }
+
+    fun updateAPI(){
         permissions.clear()
         val q = Volley.newRequestQueue(activity)
         val url = Global.urlWS + "permission/list"
 
         var stringRequest = object : StringRequest(
             Method.POST, url, Response.Listener {
-            val obj = JSONObject(it)
-            if(obj.getString("status")=="success") {
-                val data = obj.getJSONArray("data")
-                for (i in 0 until data.length()) {
-                    var permObj = data.getJSONObject(i)
-                    val perm = RunningPermission(permObj.getInt("id"), permObj.getString("start_date"), permObj.getString("end_date"), permObj.getString("description"), permObj.getString("unit_no"), permObj.getString("tenant"), permObj.getInt("number_of_worker"), permObj.getInt("workPermitsCount"))
-                    permissions.add(perm)
+                val obj = JSONObject(it)
+                if(obj.getString("status")=="success") {
+                    val data = obj.getJSONArray("data")
+                    for (i in 0 until data.length()) {
+                        var permObj = data.getJSONObject(i)
+                        val perm = RunningPermission(permObj.getInt("id"), permObj.getString("start_date"), permObj.getString("end_date"), permObj.getString("description"), permObj.getString("unit_no"), permObj.getString("tenant"), permObj.getInt("number_of_worker"), permObj.getInt("workPermitsCount"))
+                        permissions.add(perm)
+                    }
+                    updateList()
                 }
-                updateList()
-            }
-            else if(obj.getString("status")=="empty"){
-                binding.txtEmptyPL.visibility = View.VISIBLE
-                binding.recViewPermission.visibility = View.INVISIBLE
-            }
-        },
+                else if(obj.getString("status")=="empty"){
+                    binding.txtEmptyPL.visibility = View.VISIBLE
+                    binding.refreshLayoutPermission.isRefreshing = false
+                    binding.recViewPermission.visibility = View.INVISIBLE
+                }
+            },
             Response.ErrorListener {
                 val builder = AlertDialog.Builder(activity)
                 builder.setCancelable(false)
@@ -107,6 +117,9 @@ class PermissionListFragment : Fragment() {
         recyclerView.layoutManager = lm
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = PermissionListAdapter(permissions, this.activity)
+        recyclerView.isVisible = true
+        binding.txtEmptyPL.visibility = View.GONE
+        binding.refreshLayoutPermission.isRefreshing = false
     }
 
     companion object {

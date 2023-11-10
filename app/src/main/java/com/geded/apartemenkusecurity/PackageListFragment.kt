@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Response
@@ -46,46 +47,7 @@ class PackageListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        packages.clear()
-        val q = Volley.newRequestQueue(activity)
-        val url = Global.urlWS + "package/pendinglist"
-
-        var stringRequest = object : StringRequest(Method.POST, url, Response.Listener {
-                val obj = JSONObject(it)
-                if(obj.getString("status")=="success") {
-                    val data = obj.getJSONArray("data")
-                    for (i in 0 until data.length()) {
-                        var pkgObj = data.getJSONObject(i)
-                        val pkg = PendingPackage(pkgObj.getInt("id"), pkgObj.getString("receive_date"), pkgObj.getString("photo_url"), pkgObj.getString("unit_no"))
-                        packages.add(pkg)
-                    }
-                    updateList()
-                }
-                else if(obj.getString("status")=="empty"){
-                    binding.txtEmpty.visibility = View.VISIBLE
-                    binding.recViewPackageList.visibility = View.INVISIBLE
-                }
-            },
-        Response.ErrorListener {
-            val builder = AlertDialog.Builder(activity)
-            builder.setCancelable(false)
-            builder.setTitle("Terjadi Masalah")
-            builder.setMessage("Terdapat Masalah Jaringan\nSilakan Coba Lagi Nanti.")
-            builder.setPositiveButton("OK"){dialog, which->
-                activity?.finish()
-                System.exit(0)
-            }
-            builder.create().show()
-        }){
-            override fun getParams(): MutableMap<String, String> {
-                val params = HashMap<String, String>()
-                params["tower"] = tower_id.toString()
-                params["token"] = token.toString()
-                return params
-            }
-        }
-        stringRequest.setShouldCache(false)
-        q.add(stringRequest)
+        updateAPI()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -104,14 +66,64 @@ class PackageListFragment : Fragment() {
                 it.startActivity(intent)
             }
         }
+        binding.refreshLayoutPackage.setOnRefreshListener {
+            binding.recViewPackageList.isVisible = false
+            updateAPI()
+        }
     }
 
+    fun updateAPI(){
+        packages.clear()
+        val q = Volley.newRequestQueue(activity)
+        val url = Global.urlWS + "package/pendinglist"
+
+        var stringRequest = object : StringRequest(Method.POST, url, Response.Listener {
+            val obj = JSONObject(it)
+            if(obj.getString("status")=="success") {
+                val data = obj.getJSONArray("data")
+                for (i in 0 until data.length()) {
+                    var pkgObj = data.getJSONObject(i)
+                    val pkg = PendingPackage(pkgObj.getInt("id"), pkgObj.getString("receive_date"), pkgObj.getString("photo_url"), pkgObj.getString("unit_no"))
+                    packages.add(pkg)
+                }
+                updateList()
+            }
+            else if(obj.getString("status")=="empty"){
+                binding.txtEmpty.visibility = View.VISIBLE
+                binding.refreshLayoutPackage.isRefreshing = false
+                binding.recViewPackageList.visibility = View.INVISIBLE
+            }
+        },
+            Response.ErrorListener {
+                val builder = AlertDialog.Builder(activity)
+                builder.setCancelable(false)
+                builder.setTitle("Terjadi Masalah")
+                builder.setMessage("Terdapat Masalah Jaringan\nSilakan Coba Lagi Nanti.")
+                builder.setPositiveButton("OK"){dialog, which->
+                    activity?.finish()
+                    System.exit(0)
+                }
+                builder.create().show()
+            }){
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+                params["tower"] = tower_id.toString()
+                params["token"] = token.toString()
+                return params
+            }
+        }
+        stringRequest.setShouldCache(false)
+        q.add(stringRequest)
+    }
     fun updateList() {
         val lm: LinearLayoutManager = LinearLayoutManager(activity)
         var recyclerView = binding.recViewPackageList
         recyclerView.layoutManager = lm
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = PendingPackageAdapter(packages, this.activity)
+        recyclerView.isVisible = true
+        binding.txtEmpty.visibility = View.GONE
+        binding.refreshLayoutPackage.isRefreshing = false
     }
 
     companion object {
