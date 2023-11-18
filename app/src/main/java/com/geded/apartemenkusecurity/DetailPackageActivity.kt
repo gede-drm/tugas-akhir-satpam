@@ -61,6 +61,16 @@ class DetailPackageActivity : AppCompatActivity() {
                     val url = unitObj.getString("photo_url")
                     Picasso.get().load(url).into(binding.imgDetailPackage)
                 }
+                else if(obj.getString("status") == "securityprob" || obj.getString("status") == "notauthenticated") {
+                    var securityStatus = ""
+                    if(obj.getString("status") == "notauthenticated"){
+                        securityStatus = "noshift"
+                    }
+                    else {
+                        securityStatus = obj.getString("securitystatus")
+                    }
+                    Helper.logoutSystem(this, securityStatus)
+                }
             },
             Response.ErrorListener {
                 val builder = AlertDialog.Builder(this)

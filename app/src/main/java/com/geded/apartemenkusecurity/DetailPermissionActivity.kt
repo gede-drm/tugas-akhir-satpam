@@ -75,6 +75,16 @@ class DetailPermissionActivity : AppCompatActivity() {
                     binding.txtWorkerPermitDPerm.text = workers
                     binding.txtSecOfficerDPerm.text = permObj.getString("officer")
                 }
+                else if(obj.getString("status") == "securityprob" || obj.getString("status") == "notauthenticated") {
+                    var securityStatus = ""
+                    if(obj.getString("status") == "notauthenticated"){
+                        securityStatus = "noshift"
+                    }
+                    else {
+                        securityStatus = obj.getString("securitystatus")
+                    }
+                    Helper.logoutSystem(this, securityStatus)
+                }
             },
             Response.ErrorListener {
                 Log.d("ERROR VOLLEY", it.message.toString())

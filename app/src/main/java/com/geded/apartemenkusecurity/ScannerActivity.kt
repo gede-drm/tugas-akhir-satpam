@@ -158,7 +158,7 @@ class ScannerActivity : AppCompatActivity() {
                                 val builder = AlertDialog.Builder(this)
                                 builder.setCancelable(false)
                                 builder.setTitle("Perizinan ditemukan")
-                                builder.setMessage("Silakan Memasukkan Data Pekerja yang Masuk")
+                                builder.setMessage("Silakan Pilih Pekerja yang Masuk")
                                 builder.setPositiveButton("OK"){dialog, which->
                                     val intent = Intent(this, WorkerPermitsActivity::class.java)
                                     intent.putExtra(WorkerPermitsActivity.PERMISSION_PERMIT_ID, permission_id)

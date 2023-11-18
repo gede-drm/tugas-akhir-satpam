@@ -59,6 +59,7 @@ class ProfileFragment : Fragment() {
                         editor.putInt(LoginActivity.SECURITY_ID, 0)
                         editor.putString(LoginActivity.TOWER, "")
                         editor.putInt(LoginActivity.TOWER_ID, 0)
+                        editor.putString(LoginActivity.TOKEN, "")
                         editor.apply()
 
                         activity?.let{ fragmentActivity ->

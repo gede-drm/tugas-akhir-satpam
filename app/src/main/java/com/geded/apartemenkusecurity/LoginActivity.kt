@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.NoCache
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.geded.apartemenkusecurity.databinding.ActivityLoginBinding
@@ -100,6 +101,8 @@ class LoginActivity : AppCompatActivity() {
                         return params
                     }
                 }
+                q.cache.clear()
+                stringRequest.cacheEntry?.ttl = 2000
                 stringRequest.setShouldCache(false)
                 q.add(stringRequest)
             }
